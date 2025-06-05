@@ -1,0 +1,16 @@
+{% extends "main.html" %}
+{% block content %}
+<h3>Budgets</h3>
+
+<form method="post">
+  {% csrf_token %}
+  {{ form.as_p }}
+  <button type="submit">Add Budget</button>
+</form>
+
+<ul>
+  {% for budget in budgets %}
+    <li>{{ budget.category }} - {{ budget.allocated_amount }} ({{ budget.timeframe }})</li>
+  {% endfor %}
+</ul>
+{% endblock %}

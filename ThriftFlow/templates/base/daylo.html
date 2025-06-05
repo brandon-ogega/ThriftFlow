@@ -1,3 +1,11 @@
-{% extends 'main.html' %}
+{% extends "main.html" %}
 {% block content %}
+<h2>Daylo Dashboard</h2>
+<ul>
+  <li><a href="{% url 'daylo:budget_list' %}">Budgets</a></li>
+  <li><a href="{% url 'daylo:expenditure_list' %}">Expenditures</a></li>
+  <li><a href="{% url 'daylo:income_list' %}">Income Sources</a></li>
+  <li><a href="{% url 'daylo:bill_list' %}">Bills</a></li>
+  <li><a href="{% url 'daylo:notification_list' %}">Notifications</a></li>
+</ul>
 {% endblock %}

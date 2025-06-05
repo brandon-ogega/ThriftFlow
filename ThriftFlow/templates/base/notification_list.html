@@ -1,0 +1,15 @@
+{% extends "main.html" %}
+{% block content %}
+<h3>Notifications</h3>
+
+<ul>
+  {% for notification in notifications %}
+    <li {% if not notification.is_read %}style="font-weight: bold;"{% endif %}>
+      {{ notification.type|title }}: {{ notification.message }} <br>
+      <small>{{ notification.created_at }}</small>
+    </li>
+  {% empty %}
+    <li>No notifications yet.</li>
+  {% endfor %}
+</ul>
+{% endblock %}

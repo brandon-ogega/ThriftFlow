@@ -1,0 +1,20 @@
+{% extends "main.html" %}
+{% block content %}
+<h3>Income Sources</h3>
+
+<form method="post">
+  {% csrf_token %}
+  {{ form.as_p }}
+  <button type="submit">Add Income</button>
+</form>
+
+<ul>
+  {% for income in incomes %}
+    <li>
+      {{ income.title }} - {{ income.amount }} ({{ income.date_received }})
+      {% if income.is_recurring %} - <strong>Recurring</strong>{% endif %}
+      {% if income.notes %}<br><small>{{ income.notes }}</small>{% endif %}
+    </li>
+  {% endfor %}
+</ul>
+{% endblock %}
