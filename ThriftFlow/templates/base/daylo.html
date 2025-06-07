@@ -1,3 +1,77 @@
 {% extends 'main.html' %}
 {% block content %}
+<div class="container my-4">
+  <h2 class="mb-4 text-center">Daylo Dashboard</h2>
+  <div class="row g-4">
+    <div class="col-12 col-md-6 col-lg-3">
+      <div class="card h-100 shadow-sm">
+        <div class="card-body">
+          <h5 class="card-title">Bills</h5>
+          <ul class="list-group list-group-flush">
+            {% for bill in bills %}
+              <li class="list-group-item d-flex flex-column">
+                <span class="fw-bold">{{ bill.title }}</span>
+                <span>Amount: <span class="text-success">{{ bill.amount }}</span></span>
+                <span>Status: 
+                  {% if bill.status|lower == 'paid' %}
+                    <span class="badge bg-success">{{ bill.status }}</span>
+                  {% else %}
+                    <span class="badge bg-secondary">{{ bill.status }}</span>
+                  {% endif %}
+                </span>
+              </li>
+            {% empty %}
+              <li class="list-group-item text-muted">No bills.</li>
+            {% endfor %}
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="col-12 col-md-6 col-lg-3">
+      <div class="card h-100 shadow-sm">
+        <div class="card-body">
+          <h5 class="card-title">Notifications</h5>
+          <ul class="list-group list-group-flush">
+            {% for notification in notifications %}
+              <li class="list-group-item">{{ notification.message }}</li>
+            {% empty %}
+              <li class="list-group-item text-muted">No notifications.</li>
+            {% endfor %}
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="col-12 col-md-6 col-lg-3">
+      <div class="card h-100 shadow-sm">
+        <div class="card-body">
+          <h5 class="card-title">Income Sources</h5>
+          <ul class="list-group list-group-flush">
+            {% for source in income_sources %}
+              <li class="list-group-item">{{ source.title }}</li>
+            {% empty %}
+              <li class="list-group-item text-muted">No income sources.</li>
+            {% endfor %}
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="col-12 col-md-6 col-lg-3">
+      <div class="card h-100 shadow-sm">
+        <div class="card-body">
+          <h5 class="card-title">Budgets</h5>
+          <ul class="list-group list-group-flush">
+            {% for budget in budgets %}
+              <li class="list-group-item">
+                <span class="fw-bold">{{ budget.category }}</span>
+                <span class="float-end text-primary">{{ budget.limit_amount }}</span>
+              </li>
+            {% empty %}
+              <li class="list-group-item text-muted">No budgets.</li>
+            {% endfor %}
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 {% endblock %}
