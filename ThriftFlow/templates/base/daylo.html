@@ -1,11 +1,64 @@
-{% extends "main.html" %}
+{% extends 'main.html' %}
 {% block content %}
-<h2>Daylo Dashboard</h2>
-<ul>
-  <li><a href="{% url 'daylo:budget_list' %}">Budgets</a></li>
-  <li><a href="{% url 'daylo:expenditure_list' %}">Expenditures</a></li>
-  <li><a href="{% url 'daylo:income_list' %}">Income Sources</a></li>
-  <li><a href="{% url 'daylo:bill_list' %}">Bills</a></li>
-  <li><a href="{% url 'daylo:notification_list' %}">Notifications</a></li>
-</ul>
+{% load static %}
+<div class="container my-5 py-5">
+  <h3 class="mb-4 text-center">Daylo Dashboard</h3>
+  <div class="row g-4">
+    <div class="col-12 col-md-6 col-lg-3">
+      <div class="card h-100 shadow-sm">
+        <div class="card-body">
+          <h5 class="card-title">Bills</h5>
+          <ul class="list-group list-group-flush">
+{#            {% for bill in bills %}#}
+              <li class="list-group-item d-flex flex-column">
+                <span class="fw-bold">{{ bill.type }}</span>
+                <span>Type: <span class="text-success">{{ bill.type }}</span></span>
+                <span>Status:
+                  {% if bill.status|lower == 'paid' %}
+                    <span class="badge bg-success">{{ bill.status }}</span>
+                  {% else %}
+                    <span class="badge bg-secondary">{{ bill.status }}</span>
+                  {% endif %}
+                </span>
+              </li>
+{#            {% empty %}#}
+              <li class="list-group-item text-muted">No bills.</li>
+{#            {% endfor %}#}
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="col-12 col-md-6 col-lg-3">
+      <div class="card h-100 shadow-sm">
+        <div class="card-body">
+          <h5 class="card-title">Notifications</h5>
+          <ul class="list-group list-group-flush">
+{#            {% for notification in notifications %}#}
+              <li class="list-group-item">{{ notification.message }}</li>
+{#            {% empty %}#}
+              <li class="list-group-item text-muted">No notifications.</li>
+{#            {% endfor %}#}
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="col-12 col-md-6 col-lg-3">
+      <div class="card h-100 shadow-sm">
+        <div class="card-body">
+          <h5 class="card-title">Budgets</h5>
+          <ul class="list-group list-group-flush">
+{#            {% for budget in budgets %}#}
+              <li class="list-group-item">
+                <span class="fw-bold">{{ budget.type }}</span>
+                <span class="float-end text-primary">{{ budget.expense}}</span>
+              </li>
+{#            {% empty %}#}
+              <li class="list-group-item text-muted">No budgets.</li>
+{#            {% endfor %}#}
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 {% endblock %}

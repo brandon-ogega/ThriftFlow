@@ -1,3 +1,25 @@
 {% extends 'main.html' %}
 {% block content %}
+{% load static %}
+   <div class="container my-5 py-5">
+     <div class="row g-4">
+         <div class="col-12 col-md-6 col-lg-3">
+      <div class="card h-100 shadow-sm">
+        <div class="card-body">
+          <h5 class="card-title">Investments</h5>
+          <ul class="list-group list-group-flush">
+            {% for investment in investments %}
+              <li class="list-group-item">{{ investment.name }}</li>
+            {% empty %}
+              <li class="list-group-item text-muted">No Investments.</li>
+            {% endfor %}
+          </ul>
+        </div>
+      </div>
+     </div>
+     </div>
+   </div>
+{#    <a href="{% url 'investment' investment.id %}">{{ investments }}</a>#}
+   <div class="container my-5"> <a class= "badge bg-info text-dark px-2 py-2 my-5" href="{% url 'create_investment' %}">Create Investment</a></div>
+
 {% endblock %}

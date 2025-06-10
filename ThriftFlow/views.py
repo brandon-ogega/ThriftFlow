@@ -1,25 +1,97 @@
 from django.shortcuts import render,redirect
-from .models import Budget, Expenditure, IncomeSource, Bill, Notification
-from .forms import BudgetForm, ExpenditureForm, IncomeSourceForm, BillForm
+from .models import (Investment, Saving,Budget, Bill, Notification, Expenditure, Profit)
+from .forms import (InvestmentForm, SavingForm, BudgetForm,
+                    ExpenditureForm,BillForm, NotificationForm, ProfitForm)
+
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.models import User
+from django.contrib import messages
 
 
+def loginUser(request,user):
+    if request.method == "POST":
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+        try:
+            user = User.objects.get(username=username)
+        except:
+            messages.error(request, 'Username not found')
+        user = authenticate(request, username=username, password=password)
+        if user is not None:
+            login(request,user)
+            messages.error(request, f"Welcome home{username}!")
+        else:
+            messages.error(request, 'Invalid username or password')
 
+    return render(request,"base/login.html")
 
+def logoutUser(request):
+    if request.method == "POST":
+        logout(request)
+        messages.info(request, "You have been logged out")
+        return redirect("login")
+    return render(request,"base/logout_form.html")
 
+def createInvestment(request):
+    form = InvestmentForm()
+    if request.method == "POST":
+        form = InvestmentForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect("investments")
 
+    context = {"form": form,"from":"create"}
+    return render(request,'base/investment_form.html',context)
+
+def investments(request):
+    investments = Investment.objects.all()
+    context = {"investments": investments}
+    return render(request, 'base/investments.html',context)
+
+def investment(request,pk):
+    investment = Investment.objects.all(id=pk)
+    context = {"investment":investment}
+    return render(request, 'base/investment.html',context)
 def home(request):
     return render(request, 'base/home.html')
 def about(request):
     return render(request, 'base/about.html')
 
-def investments(request):
-    return render(request, 'base/investments.html')
+def profit(request,pk):
+    profit = Profit.objects.all(id=pk)
+    context = {"profit":profit}
+    return render(request, 'base/profit.html',context)
 
 def profits(request):
-    return render(request, 'base/profits.html')
+    profits = Profit.objects.all()
+    context = {"profits": profits}
+    return render(request, 'base/profits.html',context)
+def showProfits(request):
+    form = ProfitForm()
+    if request.method == "POST":
+        form = ProfitForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect("profits")
+    context = {"form": form,"from":"create"}
+    return render(request,'base/profit_form.html',context)
 
 def savings(request):
-    return render(request, 'base/savings.html')
+    savings = Saving.objects.all()
+    context = {'savings':savings}
+    return render(request, 'base/savings.html',context)
+
+def createSavings(request):
+    form = SavingForm()
+    if request.method == "POST":
+        form = SavingForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect("savings")
+
+    context = {"form": form,"from":"create"}
+    return render(request,'base/savings_form.html',context)
 
 def blog(request):
     return render(request, 'base/blog.html')
@@ -30,68 +102,43 @@ def contact(request):
 
 
 def daylo(request):
-    return render(request, 'base/daylo.html')
+    bills = Bill.objects.all()
+    notifications = Notification.objects.all()
+    budgets = Budget.objects.all()
+    context = {'bills':bills,'notifications':notifications,'budgets':budgets}
+    return render(request, 'base/daylo.html',context)
 
-
-def budget_list(request):
-    budgets = Budget.objects.filter(user=request.user)
-    if request.method == 'POST':
+def createBudget(request):
+    form = BudgetForm()
+    if request.method == "POST":
         form = BudgetForm(request.POST)
         if form.is_valid():
-            budget = form.save(commit=False)
-            budget.user = request.user
-            budget.save()
-            return redirect('daylo:budget_list')
-    else:
-        form = BudgetForm()
-    return render(request, 'base/budget_list.html', {'budgets': budgets, 'form': form})
+            form.save()
+            return redirect("daylo")
+    context = {"form": form,"from":"create"}
+    return render(request,'base/daylo.html',context)
 
-
-def expenditure_list(request):
-    expenditures = Expenditure.objects.filter(user=request.user)
-    if request.method == 'POST':
+def createExpenditure(request):
+    form = ExpenditureForm()
+    if request.method == "POST":
         form = ExpenditureForm(request.POST)
         if form.is_valid():
-            exp = form.save(commit=False)
-            exp.user = request.user
-            exp.save()
-            return redirect('daylo:expenditure_list')
-    else:
-        form = ExpenditureForm()
-    return render(request, 'base/expenditure_list.html', {'expenditures': expenditures, 'form': form})
+            form.save()
+            return redirect("daylo")
+    context = {"form": form,"from":"create"}
+    return render(request,'base/daylo.html',context)
 
-
-def income_list(request):
-    incomes = IncomeSource.objects.filter(user=request.user)
-    if request.method == 'POST':
-        form = IncomeSourceForm(request.POST)
+def createNotification(request):
+    form = NotificationForm()
+    if request.method == "POST":
+        form = NotificationForm(request.POST)
         if form.is_valid():
-            inc = form.save(commit=False)
-            inc.user = request.user
-            inc.save()
-            return redirect('daylo:income_list')
-    else:
-        form = IncomeSourceForm()
-    return render(request, 'base/income_list.html', {'incomes': incomes, 'form': form})
+            form.save()
+            return redirect("daylo")
+    context = {"form": form,"from":"create"}
+    return render(request,'base/daylo.html',context)
 
 
-def bill_list(request):
-    bills = Bill.objects.filter(user=request.user)
-    if request.method == 'POST':
-        form = BillForm(request.POST)
-        if form.is_valid():
-            bill = form.save(commit=False)
-            bill.user = request.user
-            bill.save()
-            return redirect('daylo:bill_list')
-    else:
-        form = BillForm()
-    return render(request, 'base/bill_list.html', {'bills': bills, 'form': form})
-
-
-def notification_list(request):
-    notifications = Notification.objects.filter(user=request.user).order_by('-created_at')
-    return render(request, 'base/notification_list.html', {'notifications': notifications})
 
 
 
