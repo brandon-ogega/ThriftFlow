@@ -50,16 +50,33 @@ def investments(request):
     return render(request, 'base/investments.html',context)
 
 def investment(request,pk):
-    investment = Investment.objects.all(id=pk)
+    investment = Investment.objects.get(id=pk)
     context = {"investment":investment}
     return render(request, 'base/investment.html',context)
+
+def updateInvestment(request, pk):
+    investment = Investment.objects.get(id=pk)
+    form = InvestmentForm(instance=investment)
+    if request.method == 'POST':
+        form = InvestmentForm(request.POST, instance=investment)
+        form.save()
+        return redirect('investments')
+
+    context = {'form': form,"from":"update"}
+    return render(request,'base/investment_form.html', context)
 def home(request):
+    bills = Bill.objects.all()
+    """
+     - get all bills check the most recent and soon to expire,
+     - use the due date ( get the due dat difference from the current date) 
+    
+    """
     return render(request, 'base/home.html')
 def about(request):
     return render(request, 'base/about.html')
 
 def profit(request,pk):
-    profit = Profit.objects.all(id=pk)
+    profit = Profit.objects.get(id=pk)
     context = {"profit":profit}
     return render(request, 'base/profit.html',context)
 
@@ -76,6 +93,11 @@ def showProfits(request):
             return redirect("profits")
     context = {"form": form,"from":"create"}
     return render(request,'base/profit_form.html',context)
+
+def saving(request,pk):
+    saving = Saving.objects.get(id=pk)
+    context = {"saving":saving}
+    return render(request, 'base/saving.html',context)
 
 def savings(request):
     savings = Saving.objects.all()

@@ -17,6 +17,7 @@ urlpatterns = [
     path('login/', views .login, name='login'),
     path('logout/', views.logout, name='logout'),
     path('create_investment/', views.createInvestment, name='create_investment'),
+    path('update_investment/<str:pk>/', views.updateInvestment, name='update_investment'),
     path('investment/<str:pk>/', views.investment, name='investment'),
     path('create_savings/', views.createSavings, name='create_savings'),
     path('create_budget/', views.createBudget, name='create_budget'),

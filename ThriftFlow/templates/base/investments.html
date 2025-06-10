@@ -9,7 +9,7 @@
           <h5 class="card-title">Investments</h5>
           <ul class="list-group list-group-flush">
             {% for investment in investments %}
-              <li class="list-group-item">{{ investment.name }}</li>
+                <a  href="{% url 'investment' investment.id %}"><li class="list-group-item">{{ investment.name }}</li></a>
             {% empty %}
               <li class="list-group-item text-muted">No Investments.</li>
             {% endfor %}
@@ -18,8 +18,7 @@
       </div>
      </div>
      </div>
+   <a class= "badge bg-info text-dark px-2 py-2 my-5" href="{% url 'create_investment' %}">Create Investment</a>
    </div>
-{#    <a href="{% url 'investment' investment.id %}">{{ investments }}</a>#}
-   <div class="container my-5"> <a class= "badge bg-info text-dark px-2 py-2 my-5" href="{% url 'create_investment' %}">Create Investment</a></div>
 
 {% endblock %}

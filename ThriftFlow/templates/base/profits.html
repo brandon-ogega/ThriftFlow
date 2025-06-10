@@ -1,8 +1,22 @@
 {% extends 'main.html' %}
 {% block content %}
-   <div class="my-5 ">
-
+  <div class="container my-5 py-5">
+     <div class="row g-4">
+         <div class="col-12 col-md-6 col-lg-3">
+      <div class="card h-100 shadow-sm">
+        <div class="card-body">
+          <h5 class="card-title">Profits</h5>
+          <ul class="list-group list-group-flush">
+            {% for profit in profits %}
+                <a  href="{% url 'profit' profit.id %}"><li class="list-group-item">{{ investment.total_profit }}</li></a>
+            {% empty %}
+              <li class="list-group-item text-muted">No Profit.</li>
+            {% endfor %}
+          </ul>
+        </div>
+      </div>
+     </div>
+     </div>
+        <a class= "badge bg-info text-dark px-2 py-2 my-5" href="{% url 'show_profits' %}">Show Profits</a>
    </div>
-    <div class="container my-5 py-5"><a class= "badge bg-info text-dark px-2 py-2 my-5" href="{% url 'show_profits' %}">Show Profits</a>
-</div>
 {% endblock %}

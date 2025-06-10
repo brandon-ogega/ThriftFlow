@@ -1,4 +1,4 @@
+{% extends 'main.html' %}
 {% block content %}
-    {% for investment in investments %}
-    {% endfor %}
+    <div class="container my-5 py-5"> <a href="{% url 'update_investment' investment.id %}" class="badge text-dark bg-warning my-2 p-2">Edit me</a></div>
 {% endblock %}
