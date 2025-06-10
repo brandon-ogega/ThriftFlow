@@ -138,7 +138,7 @@ def createBudget(request):
             form.save()
             return redirect("daylo")
     context = {"form": form,"from":"create"}
-    return render(request,'base/daylo.html',context)
+    return render(request,'base/budget_form.html',context)
 
 def createExpenditure(request):
     form = ExpenditureForm()
@@ -158,7 +158,17 @@ def createNotification(request):
             form.save()
             return redirect("daylo")
     context = {"form": form,"from":"create"}
-    return render(request,'base/daylo.html',context)
+    return render(request,'base/notification_form.html',context)
+
+def createBill(request):
+    form = BillForm()
+    if request.method == "POST":
+        form = BillForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect("daylo")
+    context = {"form": form,"from":"create"}
+    return render(request,'base/bill_form.html',context)
 
 
 

@@ -1,8 +1,10 @@
 {% extends 'main.html' %}
 {% block content %}
+<div class="my-5 py-5">
 <form method="POST"  class="container my-4">
     {% csrf_token %}
     {{form.as_p}}
     <input type="submit" />
 </form>
+</div>
 {% endblock %}

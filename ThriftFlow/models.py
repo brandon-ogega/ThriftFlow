@@ -49,7 +49,7 @@ class Saving(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return self.saving_goal
+        return self.timeframe
 
 
 class IncomeSource(models.Model):
@@ -124,6 +124,4 @@ class Profit(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
-    def __str__(self):
-        return self.total_profit
 

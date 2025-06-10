@@ -23,6 +23,8 @@
               </li>
 {#            {% empty %}#}
               <li class="list-group-item text-muted">No bills.</li>
+              <a class= "badge bg-info text-dark px-2 py-2 my-5" href="{% url 'create_bill' %}">Create Bill</a>
+
 {#            {% endfor %}#}
           </ul>
         </div>
@@ -37,6 +39,8 @@
               <li class="list-group-item">{{ notification.message }}</li>
 {#            {% empty %}#}
               <li class="list-group-item text-muted">No notifications.</li>
+
+              <a class= "badge bg-info text-dark px-2 py-2 my-5" href="{% url 'create_notification' %}">Create Notification</a>
 {#            {% endfor %}#}
           </ul>
         </div>
@@ -54,6 +58,8 @@
               </li>
 {#            {% empty %}#}
               <li class="list-group-item text-muted">No budgets.</li>
+                      <a class= "badge bg-info text-dark px-2 py-2 my-5" href="{% url 'create_budget' %}">Create Budget</a>
+
 {#            {% endfor %}#}
           </ul>
         </div>

@@ -24,5 +24,6 @@ urlpatterns = [
     path('create_notification/', views.createNotification, name='create_notification'),
     path('create_expenditure/', views.createExpenditure, name='create_expenditure'),
     path('show_profits/', views.showProfits, name='show_profits'),
+    path('create_bill/', views.createBill, name='create_bill'),
 
 ]
