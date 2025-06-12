@@ -1,0 +1,156 @@
+{#>{% extends 'main.html' %}#}
+{#{% block content %}#}
+{##}
+{#   <body style="background: linear-gradient(160deg, #f0f4f8, #d9e2ec); display:flex; align-items:center; justify-content:center; min-height:100vh;">#}
+{#   <div class="container my-5 py-5">#}
+{#  <div style="background:#fff; border-radius:12px; box-shadow:0 5px 15px rgba(0,0,0,0.1); width:100%; max-width:420px; padding:2rem;">#}
+{#    <ul class="nav nav-tabs mb-3" style="border-bottom:none;">#}
+{#      <li class="nav-item">#}
+{#        <button class="nav-link active" id="login-tab" data-bs-toggle="tab" data-bs-target="#login" style="border-radius:6px 6px 0 0; background:#f83600; color:#fff;">Login</button>#}
+{#      </li>#}
+{#      <li class="nav-item">#}
+{#        <button class="nav-link" id="register-tab" data-bs-toggle="tab" data-bs-target="#register" style="border-radius:6px 6px 0 0;">Register</button>#}
+{#      </li>#}
+{#    </ul>#}
+{##}
+{#    <div class="tab-content">#}
+{#      <!-- LOGIN -->#}
+{#      <div class="tab-pane fade show active" id="login">#}
+{#        <form>#}
+{#          <div class="mb-3">#}
+{#            <label for="loginEmail" class="form-label">Email</label>#}
+{#            <input type="email" id="loginEmail" required#}
+{#                   style="width:100%; padding:0.75rem 1rem; border-radius:50px; border:1px solid #ccc; outline:none;">#}
+{#          </div>#}
+{#          <div class="mb-3">#}
+{#            <label for="loginPass" class="form-label">Password</label>#}
+{#            <input type="password" id="loginPass" required#}
+{#                   style="width:100%; padding:0.75rem 1rem; border-radius:50px; border:1px solid #ccc; outline:none;">#}
+{#          </div>#}
+{#          <div class="d-flex justify-content-between align-items-center mb-3">#}
+{#            <div class="form-check">#}
+{#              <input type="checkbox" id="rememberMe" class="form-check-input">#}
+{#              <label for="rememberMe" class="form-check-label">Remember me</label>#}
+{#            </div>#}
+{#            <a href="#" id="to-register" style="font-size:0.9rem;">Register</a>#}
+{#          </div>#}
+{#          <button type="submit"#}
+{#                  style="width:100%; padding:0.75rem; border:none; border-radius:50px; background:linear-gradient(to right, #0acffe,#495aff); color:#fff; font-weight:600;">#}
+{#            Sign In#}
+{#          </button>#}
+{#        </form>#}
+{#      </div>#}
+{##}
+{#      <!-- REGISTER -->#}
+{#      <div class="tab-pane fade" id="register">#}
+{#        <form>#}
+{#          <div class="mb-3">#}
+{#            <label for="regName" class="form-label">Full Name</label>#}
+{#            <input type="text" id="regName" required#}
+{#                   style="width:100%; padding:0.75rem 1rem; border-radius:50px; border:1px solid #ccc; outline:none;">#}
+{#          </div>#}
+{#          <div class="mb-3">#}
+{#            <label for="regEmail" class="form-label">Email</label>#}
+{#            <input type="email" id="regEmail" required#}
+{#                   style="width:100%; padding:0.75rem 1rem; border-radius:50px; border:1px solid #ccc; outline:none;">#}
+{#          </div>#}
+{#          <div class="mb-3">#}
+{#            <label for="regPass" class="form-label">Password</label>#}
+{#            <input type="password" id="regPass" required#}
+{#                   style="width:100%; padding:0.75rem 1rem; border-radius:50px; border:1px solid #ccc; outline:none;">#}
+{#          </div>#}
+{#          <div class="mb-3">#}
+{#            <label for="regPass2" class="form-label">Confirm Password</label>#}
+{#            <input type="password" id="regPass2" required#}
+{#                   style="width:100%; padding:0.75rem 1rem; border-radius:50px; border:1px solid #ccc; outline:none;">#}
+{#          </div>#}
+{#          <div class="form-check mb-3">#}
+{#            <input type="checkbox" id="termsCheck" class="form-check-input" required>#}
+{#            <label for="termsCheck" class="form-check-label">Agree to terms</label>#}
+{#          </div>#}
+{#          <button type="submit"#}
+{#                  style="width:100%; padding:0.75rem; border:none; border-radius:50px; background:linear-gradient(to right, #0acffe,#495aff); color:#fff; font-weight:600;">#}
+{#            Register#}
+{#          </button>#}
+{#        </form>#}
+{#      </div>#}
+{#    </div>#}
+{#  </div>#}
+{#   <script>#}
+{#  document.getElementById('to-register').addEventListener('click', e => {#}
+{#    e.preventDefault();#}
+{#    const btn = document.getElementById('register-tab');#}
+{#    bootstrap.Tab.getOrCreateInstance(btn).show();#}
+{#  });#}
+{#</script>#}
+{#</div>#}
+{#   <body style="background-color: #f0f4ff;">#}
+{##}
+{#  <!-- Header Section -->#}
+{#  <div style="background: linear-gradient(90deg, #0d6efd, #3b82f6); padding: 3rem 0; color: white; text-align: center;">#}
+{#    <h2 class="fw-bold" style="margin-bottom: 0.5rem;">Get in Touch</h2>#}
+{#    <p class="mb-0">We'd love to hear from you. Let us know how we can help.</p>#}
+{#  </div>#}
+{##}
+{#  <div class="container py-5">#}
+{#    <div class="row g-4">#}
+{#      <!-- Contact Info -->#}
+{#      <div class="col-md-5">#}
+{#        <div class="card h-100" style="border-radius: 15px; padding: 2rem; background-color: #e3f2fd; border: none;">#}
+{#          <h5 class="mb-4 text-primary">Reach Out</h5>#}
+{##}
+{#          <div class="d-flex align-items-start mb-3">#}
+{#            <i class="bi bi-envelope-fill" style="font-size: 1.5rem; color: #0d6efd; margin-right: 0.75rem;"></i>#}
+{#            <div>#}
+{#              <strong>Email</strong><br>#}
+{#              <a href="mailto:support@yourapp.com" style="color: #0d6efd;">support@yourapp.com</a>#}
+{#            </div>#}
+{#          </div>#}
+{##}
+{#          <div class="d-flex align-items-start mb-3">#}
+{#            <i class="bi bi-telephone-fill" style="font-size: 1.5rem; color: #0d6efd; margin-right: 0.75rem;"></i>#}
+{#            <div>#}
+{#              <strong>Phone</strong><br>#}
+{#              <span style="color: #333;">+254 712 345 678</span>#}
+{#            </div>#}
+{#          </div>#}
+{##}
+{#          <div class="d-flex align-items-start">#}
+{#            <i class="bi bi-geo-alt-fill" style="font-size: 1.5rem; color: #0d6efd; margin-right: 0.75rem;"></i>#}
+{#            <div>#}
+{#              <strong>Location</strong><br>#}
+{#              <span style="color: #333;">Nairobi, Kenya</span>#}
+{#            </div>#}
+{#          </div>#}
+{#        </div>#}
+{#      </div>#}
+{##}
+{#      <!-- Contact Form -->#}
+{#      <div class="col-md-7">#}
+{#        <div class="card" style="border-radius: 15px; padding: 2rem; background-color: #ffffff; border: none; box-shadow: 0 0 20px rgba(0,0,0,0.05);">#}
+{#          <h5 class="mb-4 text-primary">Send a Message</h5>#}
+{#          <form action="#" method="POST">#}
+{#            <div class="mb-3">#}
+{#              <label for="name" class="form-label">Your Name</label>#}
+{#              <input type="text" class="form-control" id="name" name="name" placeholder="e.g. Jane Doe" required#}
+{#                style="border-radius: 10px; box-shadow: none; border-color: #0d6efd;">#}
+{#            </div>#}
+{#            <div class="mb-3">#}
+{#              <label for="email" class="form-label">Your Email</label>#}
+{#              <input type="email" class="form-control" id="email" name="email" placeholder="e.g. jane@example.com" required#}
+{#                style="border-radius: 10px; box-shadow: none; border-color: #0d6efd;">#}
+{#            </div>#}
+{#            <div class="mb-3">#}
+{#              <label for="message" class="form-label">Your Message</label>#}
+{#              <textarea class="form-control" id="message" name="message" rows="5" placeholder="Type your message here..." required#}
+{#                style="border-radius: 10px; box-shadow: none; border-color: #0d6efd;"></textarea>#}
+{#            </div>#}
+{#            <button type="submit" class="btn btn-primary px-4" style="border-radius: 10px;">Send</button>#}
+{#          </form>#}
+{#        </div>#}
+{#      </div>#}
+{#    </div>#}
+{#  </div>#}
+{#    </body>#}
+{##}
+{#{% endblock %}#}

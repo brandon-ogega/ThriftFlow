@@ -7,24 +7,41 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 from django.contrib import messages
+from django.contrib.auth.forms import UserCreationForm
 
 
-def loginUser(request,user):
-    if request.method == "POST":
+
+def loginUser(request):
+    if request.method == 'POST':
         username = request.POST.get('username')
         password = request.POST.get('password')
         try:
-            user = User.objects.get(username=username)
+            user = User.objects.get(username = username)
         except:
             messages.error(request, 'Username not found')
         user = authenticate(request, username=username, password=password)
         if user is not None:
             login(request,user)
             messages.error(request, f"Welcome home{username}!")
+            return redirect('home')
         else:
             messages.error(request, 'Invalid username or password')
 
     return render(request,"base/login.html")
+
+def createUser(request):
+    if request.method == 'POST':
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Account created successfully')
+            return redirect('login')
+        else:
+            messages.error(request, 'Error creating account')
+    else:
+        form = UserCreationForm()
+
+    return render(request, 'base/register.html', {'form': form})
 
 def logoutUser(request):
     if request.method == "POST":
@@ -43,17 +60,21 @@ def createInvestment(request):
 
     context = {"form": form,"from":"create"}
     return render(request,'base/investment_form.html',context)
-
+@login_required(login_url="login")
 def investments(request):
     investments = Investment.objects.all()
     context = {"investments": investments}
     return render(request, 'base/investments.html',context)
 
+
+@login_required(login_url="login")
 def investment(request,pk):
     investment = Investment.objects.get(id=pk)
     context = {"investment":investment}
     return render(request, 'base/investment.html',context)
 
+
+@login_required(login_url="login")
 def updateInvestment(request, pk):
     investment = Investment.objects.get(id=pk)
     form = InvestmentForm(instance=investment)
@@ -75,15 +96,22 @@ def home(request):
 def about(request):
     return render(request, 'base/about.html')
 
+
+@login_required(login_url="login")
 def profit(request,pk):
     profit = Profit.objects.get(id=pk)
     context = {"profit":profit}
     return render(request, 'base/profit.html',context)
 
+
+@login_required(login_url="login")
 def profits(request):
     profits = Profit.objects.all()
     context = {"profits": profits}
     return render(request, 'base/profits.html',context)
+
+
+@login_required(login_url="login")
 def showProfits(request):
     form = ProfitForm()
     if request.method == "POST":
@@ -94,16 +122,21 @@ def showProfits(request):
     context = {"form": form,"from":"create"}
     return render(request,'base/profit_form.html',context)
 
+@login_required(login_url="login")
 def saving(request,pk):
     saving = Saving.objects.get(id=pk)
     context = {"saving":saving}
     return render(request, 'base/saving.html',context)
 
+
+@login_required(login_url="login")
 def savings(request):
     savings = Saving.objects.all()
     context = {'savings':savings}
     return render(request, 'base/savings.html',context)
 
+
+@login_required(login_url="login")
 def createSavings(request):
     form = SavingForm()
     if request.method == "POST":
@@ -115,14 +148,12 @@ def createSavings(request):
     context = {"form": form,"from":"create"}
     return render(request,'base/savings_form.html',context)
 
-def blog(request):
-    return render(request, 'base/blog.html')
 
 def contact(request):
     return render(request, 'base/contact.html')
 
 
-
+@login_required(login_url="login")
 def daylo(request):
     bills = Bill.objects.all()
     notifications = Notification.objects.all()
@@ -130,6 +161,22 @@ def daylo(request):
     context = {'bills':bills,'notifications':notifications,'budgets':budgets}
     return render(request, 'base/daylo.html',context)
 
+def budget(request,pk):
+    budget = Budget.objects.get(id=pk)
+    context = {'budget':budget}
+    return render(request, 'base/budget.html',context)
+
+def updateBudget(request,pk):
+    budget = Budget.objects.get(id=pk)
+    form = BudgetForm(instance=budget)
+    if request.method == "POST":
+        form = BudgetForm(request.POST, instance=budget)
+        form.save()
+        return redirect("daylo")
+    context = {'form': form,"from":"update"}
+    return render(request, 'base/budget_form.html',context)
+
+@login_required(login_url="login")
 def createBudget(request):
     form = BudgetForm()
     if request.method == "POST":
@@ -140,6 +187,7 @@ def createBudget(request):
     context = {"form": form,"from":"create"}
     return render(request,'base/budget_form.html',context)
 
+@login_required(login_url="login")
 def createExpenditure(request):
     form = ExpenditureForm()
     if request.method == "POST":
@@ -150,6 +198,7 @@ def createExpenditure(request):
     context = {"form": form,"from":"create"}
     return render(request,'base/daylo.html',context)
 
+@login_required(login_url="login")
 def createNotification(request):
     form = NotificationForm()
     if request.method == "POST":
@@ -160,6 +209,7 @@ def createNotification(request):
     context = {"form": form,"from":"create"}
     return render(request,'base/notification_form.html',context)
 
+@login_required(login_url="login")
 def createBill(request):
     form = BillForm()
     if request.method == "POST":

@@ -1,3 +1,119 @@
 {% extends 'main.html' %}
 {% block content %}
+    <body style="background-color: #f8f9fa;">
+
+  <div class="container py-5 my-5">
+    <div class="text-center mb-5">
+      <h4 class="fw-bold">Contact Us</h4>
+      <p class="text-muted">Have a question or feedback? We'd love to hear from you.</p>
+    </div>
+
+    <div class="row g-4">
+      <!-- Contact Info -->
+      <div class="col-md-5">
+        <div class="card h-100" style="border-radius: 15px; padding: 2rem; box-shadow: 0 0 30px rgba(0,0,0,0.05);">
+          <h5 class="mb-4">Reach Out</h5>
+
+          <div class="d-flex align-items-start mb-3">
+            <i class="bi bi-envelope-fill" style="font-size: 1.5rem; color: #0d6efd; margin-right: 0.75rem;"></i>
+            <div>
+              <strong>Email</strong><br>
+              <a href="mailto:support@yourapp.com">support@thriftflow.com</a>
+            </div>
+          </div>
+
+          <div class="d-flex align-items-start mb-3">
+            <i class="bi bi-telephone-fill" style="font-size: 1.5rem; color: #0d6efd; margin-right: 0.75rem;"></i>
+            <div>
+              <strong>Phone</strong><br>
+              +254 757 116 895
+            </div>
+          </div>
+
+          <div class="d-flex align-items-start">
+            <i class="bi bi-geo-alt-fill" style="font-size: 1.5rem; color: #0d6efd; margin-right: 0.75rem;"></i>
+            <div>
+              <strong>Location</strong><br>
+              Nairobi, Kenya
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Contact Form -->
+      <div class="col-md-7">
+        <div class="card" style="border-radius: 15px; padding: 2rem; box-shadow: 0 0 30px rgba(0,0,0,0.05);">
+          <h5 class="mb-4">Send a Message</h5>
+          <form action="#" method="POST">
+            <div class="mb-3">
+              <label for="name" class="form-label">Your Name</label>
+              <input type="text" class="form-control" id="name" name="name" placeholder="e.g. Jane Doe" required
+                style="border-radius: 10px; box-shadow: none;">
+            </div>
+            <div class="mb-3">
+              <label for="email" class="form-label">Your Email</label>
+              <input type="email" class="form-control" id="email" name="email" placeholder="e.g. jane@example.com" required
+                style="border-radius: 10px; box-shadow: none;">
+            </div>
+            <div class="mb-3">
+              <label for="message" class="form-label">Your Message</label>
+              <textarea class="form-control" id="message" name="message" rows="5" placeholder="Type your message here..." required
+                style="border-radius: 10px; box-shadow: none;"></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary px-4" style="border-radius: 10px;">Send</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+    </body>
+    <!-- Footer Start -->
+    <div class="container-fluid bg-dark text-light footer mt-5 py-5 wow fadeIn" data-wow-delay="0.1s">
+        <div class="container py-5">
+            <div class="row g-5">
+                <div class="col-lg-3 col-md-6">
+                    <h4 class="text-white mb-4">Our Location</h4>
+                    <p class="mb-2"><i class="fa fa-map-marker-alt me-3"></i>Westlands, Nairobi, Kenya</p>
+                    <p class="mb-2"><i class="fa fa-phone-alt me-3"></i>+254 757 116 895</p>
+                    <p class="mb-2"><i class="fa fa-envelope me-3"></i>otundobrandon@gmail.com</p>
+                    <div class="d-flex pt-2">
+                        <a class="btn btn-square btn-outline-light rounded-circle me-2" href=""><i
+                                class="fab fa-twitter"></i></a>
+                        <a class="btn btn-square btn-outline-light rounded-circle me-2" href=""><i
+                                class="fab fa-facebook-f"></i></a>
+                        <a class="btn btn-square btn-outline-light rounded-circle me-2" href=""><i
+                                class="fab fa-youtube"></i></a>
+                        <a class="btn btn-square btn-outline-light rounded-circle me-2" href=""><i
+                                class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <h4 class="text-white mb-4">Services</h4>
+                    <a class="btn btn-link" href="">Financial Planning</a>
+                    <a class="btn btn-link" href="">Financial Advice</a>
+                    <a class="btn btn-link" href="">Investing Assistance</a>
+                    <a class="btn btn-link" href="">Savings Tracking</a>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <h4 class="text-white mb-4">Quick Links</h4>
+                    <a class="btn btn-link" href="{% url 'home' %}">Home</a>
+                    <a class="btn btn-link" href="{% url 'about' %}">About</a>
+                    <a class="btn btn-link" href="{% url 'login' %}">Login</a>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <h4 class="text-white mb-4">Newsletter</h4>
+                    <p>Subscribe to get our daily updates and news on financial breakthroughs across our client network.</p>
+                    <div class="position-relative w-100">
+                        <input class="form-control bg-white border-0 w-100 py-3 ps-4 pe-5" type="text"
+                            placeholder="Your email">
+                        <button type="button"
+                            class="btn btn-primary py-2 position-absolute top-0 end-0 mt-2 me-2">SignUp</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Footer End -->
+
+
 {% endblock %}

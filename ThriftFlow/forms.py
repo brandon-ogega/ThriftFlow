@@ -21,7 +21,7 @@ class BillForm(forms.ModelForm):
 class InvestmentForm(forms.ModelForm):
     class Meta:
         model = Investment
-        fields = ['name', 'amount_invested', 'expected_return', 'actual_return', 'start_date', 'end_date']
+        fields = ['name', 'amount_invested', 'expected_return', 'start_date', 'end_date']
         widgets = {
             'start_date': forms.DateInput(attrs={'type': 'date'}),
             'end_date': forms.DateInput(attrs={'type': 'date'}),

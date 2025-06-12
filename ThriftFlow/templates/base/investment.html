@@ -1,4 +1,63 @@
 {% extends 'main.html' %}
 {% block content %}
-    <div class="container my-5 py-5"> <a href="{% url 'update_investment' investment.id %}" class="badge text-dark bg-warning my-2 p-2">Edit me</a></div>
+    <body class="">
+  <div class="container my-5 py-5">
+  <div class="card mx-auto shadow" style="max-width:600px; position:relative;">
+
+    <!-- Header: Name + Status -->
+    <div class="card-header d-flex justify-content-between align-items-center" style="background:#fff;">
+      <div>
+        <i class="bi bi-graph-up me-2 text-primary"></i>{{ investment.name }}
+      </div>
+      <span class="badge rounded-pill"
+            style="background-color:{{ investment.end_date|yesno:'#6c757d,#198754' }};
+                   color:#fff; font-size:0.9em;">
+        {% if investment.end_date %}ACTIVE{% else %}ENDED   {% endif %}
+      </span>
+    </div>
+
+    <!-- Body: Details -->
+    <div class="card-body">
+      <dl class="row mb-3">
+        <dt class="col-sm-5">Amount Invested</dt>
+        <dd class="col-sm-7">Kshs {{ investment.amount_invested|floatformat:2 }}</dd>
+
+        {% if investment.expected_return is not None %}
+          <dt class="col-sm-5">Gains Expected</dt>
+          <dd class="col-sm-7">
+            <span class="badge rounded-pill"
+                  style="background-color:{{ investment.expected_return}};
+                      color:#198754; font-size:0.9em;">Kshs {{ investment.expected_return|floatformat:2 }}
+            </span>
+          </dd>
+        {% endif %}
+
+        <dt class="col-sm-5">Start Date</dt>
+        <dd class="col-sm-7">{{ investment.start_date|date:"M d, Y" }}</dd>
+
+        {% if investment.end_date %}
+          <dt class="col-sm-5">End Date</dt>
+          <dd class="col-sm-7">{{ investment.end_date|date:"M d, Y" }}</dd>
+        {% endif %}
+
+        <dt class="col-sm-5">Created On</dt>
+        <dd class="col-sm-7">{{ investment.created_at|date:"M d, Y H:i" }}</dd>
+      </dl>
+    </div>
+
+    <!-- Footer: Actions -->
+    <div class="card-footer text-end bg-white">
+      <a href="{% url 'investments' %}"
+         class="btn btn-outline-secondary me-2">
+        <i class="bi bi-arrow-left-circle me-1"></i>Back
+      </a>
+      <a href="{% url 'update_investment' investment.id %}"
+         class="btn btn-primary">
+        <i class="bi bi-pencil-square me-1"></i>Edit
+      </a>
+    </div>
+  </div>
+</div>
+</body>
+{#    <div class="container my-5 py-5"> <a href="{% url 'update_investment' investment.id %}" class="badge text-dark bg-warning my-2 p-2">Edit me</a></div>#}
 {% endblock %}

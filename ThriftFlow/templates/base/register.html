@@ -1,7 +1,93 @@
-<form method="POST" class="container my-4">
+{% extends 'main.html' %}
+{% block content %}
+   <body class="bg-light">
+<div class="container py-5 my-5">
+  <div class="card shadow-lg mx-auto" style="max-width: 360px;">
+    <div class="card-header text-center bg-white text-white">
+      <h4 class="mb-0">
+        <i class="bi bi-person-plus-fill me-2"></i>Create Account
+      </h4>
+    </div>
+    <div class="card-body">
+      <form method="POST" action="{% url 'register' %}" novalidate>
+        {% csrf_token %}
 
-    {% csrf_token %}
-    {{form.as_p}}
-    {{bio.as_p}}
-    <input type="submit" value="create account"/>
-</form>
+        {% if form.non_field_errors %}
+          <div class="alert alert-danger">
+            {% for err in form.non_field_errors %}
+              <p>{{ err }}</p>
+            {% endfor %}
+          </div>
+        {% endif %}
+
+        <div class="form-floating mb-3">
+          <input type="text"
+            name="username"
+            id="id_username"
+            placeholder="Username"
+            required
+            class="form-control {% if form.username.errors %}is-invalid{% endif %}"
+            value="{{ form.username.value|default_if_none:'' }}"
+          >
+          <label for="id_username">Username</label>
+          {% for err in form.username.errors %}
+            <div class="invalid-feedback">{{ err }}</div>
+          {% endfor %}
+        </div>
+
+        <div class="form-floating mb-3">
+          <input type="email"
+            name="email"
+            id="id_email"
+            placeholder="name@example.com"
+            required
+            class="form-control {% if form.email.errors %}is-invalid{% endif %}"
+            value="{{ form.email.value|default_if_none:'' }}"
+          >
+          <label for="id_email">Email address</label>
+          {% for err in form.email.errors %}
+            <div class="invalid-feedback">{{ err }}</div>
+          {% endfor %}
+        </div>
+
+        <div class="form-floating mb-3">
+          <input type="password"
+            name="password1"
+            id="id_password1"
+            placeholder="Password"
+            required
+            class="form-control {% if form.password1.errors %}is-invalid{% endif %}"
+          >
+          <label for="id_password1">Password</label>
+          {% for err in form.password1.errors %}
+            <div class="invalid-feedback">{{ err }}</div>
+          {% endfor %}
+        </div>
+
+        <div class="form-floating mb-4">
+          <input type="password"
+            name="password2"
+            id="id_password2"
+            placeholder="Confirm Password"
+            required
+            class="form-control {% if form.password2.errors %}is-invalid{% endif %}"
+          >
+          <label for="id_password2">Confirm Password</label>
+          {% for err in form.password2.errors %}
+            <div class="invalid-feedback">{{ err }}</div>
+          {% endfor %}
+        </div>
+
+        <button type="submit" class="btn btn-primary btn-lg w-100 rounded-pill">
+          <i class="bi bi-check-circle me-2"></i>Sign Up
+        </button>
+      </form>
+    </div>
+    <div class="card-footer text-center small text-muted">
+      Already have an account? <a href="{% url 'login' %}">Log in</a>
+    </div>
+  </div>
+</div>
+</body>
+
+{% endblock %}

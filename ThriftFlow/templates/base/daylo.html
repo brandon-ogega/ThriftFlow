@@ -2,69 +2,33 @@
 {% block content %}
 {% load static %}
 <div class="container my-5 py-5">
-  <h3 class="mb-4 text-center">Daylo Dashboard</h3>
-  <div class="row g-4">
-    <div class="col-12 col-md-6 col-lg-3">
-      <div class="card h-100 shadow-sm">
-        <div class="card-body">
-          <h5 class="card-title">Bills</h5>
-          <ul class="list-group list-group-flush">
-{#            {% for bill in bills %}#}
-              <li class="list-group-item d-flex flex-column">
-                <span class="fw-bold">{{ bill.type }}</span>
-                <span>Type: <span class="text-success">{{ bill.type }}</span></span>
-                <span>Status:
-                  {% if bill.status|lower == 'paid' %}
-                    <span class="badge bg-success">{{ bill.status }}</span>
-                  {% else %}
-                    <span class="badge bg-secondary">{{ bill.status }}</span>
-                  {% endif %}
-                </span>
-              </li>
-{#            {% empty %}#}
-              <li class="list-group-item text-muted">No bills.</li>
-              <a class= "badge bg-info text-dark px-2 py-2 my-5" href="{% url 'create_bill' %}">Create Bill</a>
-
-{#            {% endfor %}#}
-          </ul>
-        </div>
+<div class="list-group list-group-light mx-auto" style="max-width:600px;">
+  {% for b in budgets %}
+    <div class="list-group-item list-group-item-action d-flex justify-content-between align-items-center px-3 border-0 rounded mb-2 shadow-sm">
+      <div>
+        <i class="bi bi-wallet2 me-2 text-info"></i>
+        <a href="{% url 'budget' b.id %}" class="fw-semibold text-dark text-decoration-none">
+          {{ b.item }}
+        </a>
       </div>
+      <a href="{% url 'budget' b.id %}" class="btn btn-outline-info btn-sm">
+        View
+      </a>
     </div>
-    <div class="col-12 col-md-6 col-lg-3">
-      <div class="card h-100 shadow-sm">
-        <div class="card-body">
-          <h5 class="card-title">Notifications</h5>
-          <ul class="list-group list-group-flush">
-{#            {% for notification in notifications %}#}
-              <li class="list-group-item">{{ notification.message }}</li>
-{#            {% empty %}#}
-              <li class="list-group-item text-muted">No notifications.</li>
+  {% empty %}
+    <div class="list-group-item text-muted px-3 border-0 rounded mb-2">
+      No budgets available.
+    </div>
+  {% endfor %}
 
-              <a class= "badge bg-info text-dark px-2 py-2 my-5" href="{% url 'create_notification' %}">Create Notification</a>
-{#            {% endfor %}#}
-          </ul>
-        </div>
-      </div>
-    </div>
-    <div class="col-12 col-md-6 col-lg-3">
-      <div class="card h-100 shadow-sm">
-        <div class="card-body">
-          <h5 class="card-title">Budgets</h5>
-          <ul class="list-group list-group-flush">
-{#            {% for budget in budgets %}#}
-              <li class="list-group-item">
-                <span class="fw-bold">{{ budget.type }}</span>
-                <span class="float-end text-primary">{{ budget.expense}}</span>
-              </li>
-{#            {% empty %}#}
-              <li class="list-group-item text-muted">No budgets.</li>
-                      <a class= "badge bg-info text-dark px-2 py-2 my-5" href="{% url 'create_budget' %}">Create Budget</a>
-
-{#            {% endfor %}#}
-          </ul>
-        </div>
-      </div>
-    </div>
+  <div class="d-flex justify-content-between align-items-center mt-3">
+    <span class="badge bg-info text-dark px-2 py-1">
+      {{ budgets|length }} {% if budgets|length == 1 %}budget{% else %}budgets{% endif %}
+    </span>
+    <a class="btn btn-info btn-sm" href="{% url 'create_budget' %}">
+      + New Budget
+    </a>
   </div>
+</div>
 </div>
 {% endblock %}

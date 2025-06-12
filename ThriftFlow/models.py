@@ -67,18 +67,13 @@ class Investment(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     name = models.CharField(max_length=100)
     amount_invested = models.DecimalField(decimal_places=2, max_digits=12)
-    expected_return = models.DecimalField(decimal_places=2, max_digits=12)
-    actual_return = models.DecimalField(decimal_places=2, max_digits=12, null=True,blank=True)
+    expected_return = models.DecimalField(decimal_places=2, max_digits=12, null=True,blank=True)
     start_date = models.DateField()
     end_date = models.DateField(null=True,blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
 
-    def profit(self):
-        if self.actual_return:
-            return self.actual_return - self.amount_invested
-        return None
     def __str__(self):
-        return f"{self.name}| Invested: {self.amount_invested}| Expected Return: {self.expected_return}"
+        return self.name
 
 
 class Notification(models.Model):
