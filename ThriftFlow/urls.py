@@ -15,6 +15,7 @@ urlpatterns = [
     path('profits/', views.profits, name='profits'),
     path('profit/<str:pk>/', views.profit, name='profit'),
     path('savings/', views.savings, name='savings'),
+    path('saving/<str:pk>/', views.saving, name='saving'),
     path('login/', views.loginUser, name='login'),
     path('logout/', views.logoutUser, name='logout'),
     path('create_investment/', views.createInvestment, name='create_investment'),

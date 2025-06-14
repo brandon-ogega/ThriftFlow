@@ -1,9 +1,8 @@
 from django.contrib.auth import user_logged_in
 from django.db import models
 import uuid
-from django.conf import settings
 
-from django.db.models import ForeignKey
+
 
 
 #Create your models here.
@@ -49,7 +48,7 @@ class Saving(models.Model):
     saving_goal = models.DecimalField(decimal_places=2, max_digits=12,default=0.00)
     current_amount = models.DecimalField(decimal_places=2, max_digits=12)
     timeframe = models.CharField(max_length=10, choices=TIMEFRAME_CHOICES,default='daily')
-    created_at = models.DateTimeField(default=user_logged_in)
+    created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return self.timeframe
@@ -119,7 +118,7 @@ class Profit(models.Model):
     investment_gains = models.DecimalField(decimal_places=2, max_digits=12,default=0.00)
     losses= models.DecimalField(decimal_places=2, max_digits=12,default=0.00)
     total_profit = models.DecimalField(decimal_places=2, max_digits=12,default=0.00)
-    created_at = models.DateTimeField(default=user_logged_in)
-    updated_at = models.DateTimeField(auto_now=True,)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
 
 

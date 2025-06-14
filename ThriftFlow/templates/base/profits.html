@@ -1,22 +1,33 @@
 {% extends 'main.html' %}
 {% block content %}
   <div class="container my-5 py-5">
-     <div class="row g-4">
-         <div class="col-12 col-md-6 col-lg-3">
-      <div class="card h-100 shadow-sm">
-        <div class="card-body">
-          <h5 class="card-title">Profits</h5>
+   <div class="row justify-content-center">
+    <div class="col-12 col-md-10 col-lg-8">
+      <div class="card shadow-lg border-0 rounded-4">
+        <div class="card-body py-4 px-4">
+          <h4 class="card-title mb-4 d-flex align-items-center gap-2 text-info-emphasis fw-semibold">
+            <i class="bi bi-cash-coin fs-4"></i> Profits Overview
+          </h4>
+
           <ul class="list-group list-group-flush">
             {% for profit in profits %}
-                <a  href="{% url 'profit' profit.id %}"><li class="list-group-item">{{ investment.total_profit }}</li></a>
+              <li class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 py-3 border-bottom">
+                <span class="fw-medium fs-6">{{ profit.source }}</span>
+                <a href="{% url 'profit' profit.id %}" class="badge bg-info-subtle text-info text-decoration-none px-3 py-2">
+                  View Details
+                </a>
+              </li>
             {% empty %}
-              <li class="list-group-item text-muted">No Profit.</li>
+              <li class="list-group-item text-muted px-0 py-3">No Profit.</li>
             {% endfor %}
           </ul>
         </div>
       </div>
-     </div>
-     </div>
+    </div>
+  </div>
+
+
+
         <a class= "badge bg-info text-dark px-2 py-2 my-5" href="{% url 'show_profits' %}">Create Profits</a>
    </div>
 {% endblock %}

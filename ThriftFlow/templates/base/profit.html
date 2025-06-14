@@ -1,4 +1,45 @@
 {% extends 'main.html' %}
 {% block content %}
+    <div class="container my-5 py-5">
+  <div class="row justify-content-center">
+    <div class="col-12 col-lg-8">
+      <div class="card shadow-lg border-0 rounded-4">
+        <div class="card-body px-4 py-5">
+          <h4 class="mb-4 text-primary-emphasis d-flex align-items-center gap-2">
+            <i class="bi bi-graph-up-arrow fs-3"></i> Profit Details
+          </h4>
+
+          <dl class="row text-secondary-emphasis fs-6">
+            <dt class="col-sm-4">Source</dt>
+            <dd class="col-sm-8 fw-semibold text-dark">{{ profit.source }}</dd>
+
+            <dt class="col-sm-4">Amount Invested</dt>
+            <dd class="col-sm-8">Ksh {{ profit.amount_invested }}</dd>
+
+            <dt class="col-sm-4">Income Growth</dt>
+            <dd class="col-sm-8">Ksh {{ profit.income_growth }}</dd>
+
+            <dt class="col-sm-4">Investment Gains</dt>
+            <dd class="col-sm-8 text-success">+ Ksh {{ profit.investment_gains }}</dd>
+
+            <dt class="col-sm-4">Losses</dt>
+            <dd class="col-sm-8 text-danger">− Ksh {{ profit.losses }}</dd>
+
+            <dt class="col-sm-4">Total Profit</dt>
+            <dd class="col-sm-8 fw-bold text-info">Ksh {{ profit.total_profit }}</dd>
+
+            <dt class="col-sm-4">Created</dt>
+            <dd class="col-sm-8">{{ profit.created_at|date:"M d, Y H:i" }}</dd>
+          </dl>
+
+          <a href="{% url 'profits'  %}" class="btn btn-info mt-4">
+             Back to Profits
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
 {#    <div class="container my-5 py-5"> <a href="{% url 'update_investment' investment.id %}" class="badge text-dark bg-warning my-2 p-2">Edit me</a></div>#}
 {% endblock %}
