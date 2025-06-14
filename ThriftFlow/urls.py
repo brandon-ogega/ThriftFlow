@@ -28,5 +28,8 @@ urlpatterns = [
     path('create_expenditure/', views.createExpenditure, name='create_expenditure'),
     path('show_profits/', views.showProfits, name='show_profits'),
     path('create_bill/', views.createBill, name='create_bill'),
+    path('bill/<str:pk>/', views.bill, name='bill'),
+    path('update_bill/<str:pk>/', views.updateBill, name='update_bill'),
+    path('notifications/', views.notifications, name='notifications'),
 
 ]

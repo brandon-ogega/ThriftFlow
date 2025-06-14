@@ -1,5 +1,5 @@
-from django.shortcuts import render,redirect
-from .models import (Investment, Saving,Budget, Bill, Notification, Expenditure, Profit)
+from django.shortcuts import render,redirect,get_object_or_404
+from .models import (Investment, Saving,Budget, Bill, Notification,Profit)
 from .forms import (InvestmentForm, SavingForm, BudgetForm,
                     ExpenditureForm,BillForm, NotificationForm, ProfitForm)
 
@@ -166,6 +166,8 @@ def budget(request,pk):
     context = {'budget':budget}
     return render(request, 'base/budget.html',context)
 
+
+
 def updateBudget(request,pk):
     budget = Budget.objects.get(id=pk)
     form = BudgetForm(instance=budget)
@@ -220,8 +222,25 @@ def createBill(request):
     context = {"form": form,"from":"create"}
     return render(request,'base/bill_form.html',context)
 
+def bill(request,pk):
+    bill = Bill.objects.get(id=pk)
+    context = {'bill':bill}
+    return render(request, 'base/bill.html',context)
+
+def updateBill(request,pk):
+    bill = Bill.objects.get(id=pk)
+    form = BillForm(instance=bill)
+    if request.method == "POST":
+        form = BillForm(request.POST, instance=bill)
+        form.save()
+        return redirect("daylo")
+    context = {'form': form,"from":"update"}
+    return render(request, 'base/bill_form.html',context)
+
+def notifications(request):
+    notifications = Notification.objects.all()
+    context = {'notifications':notifications}
+    return render(request, 'base/notifications.html', context)
 
 
-
-
-# Create your views here.
+#Create your views here.

@@ -1,0 +1,50 @@
+{% extends 'main.html' %}
+{% block content %}
+
+<div class="container my-5 py-5">
+ <h3 class="mb-4 d-flex align-items-center gap-2">
+  <span class="fs-3 lh-1">🔔</span>
+  <span class="fw-semibold text-body-emphasis">Notifications</span>
+</h3>
+
+ <div class="list-group list-group-flush">
+  {% for notif in notifications %}
+    <a href="{% url 'notifications' %}" class="list-group-item list-group-item-action d-flex justify-content-between align-items-start border-start border-4 rounded-1 shadow-sm mb-2
+      {% if not notif.is_read %} bg-warning bg-opacity-25 border-warning {% else %} border-light {% endif %}">
+
+      <div class="ms-2 me-auto w-100">
+        <div class="fw-semibold d-flex align-items-center gap-2
+          {% if not notif.is_read %}text-dark dark:text-light{% else %}text-muted{% endif %}">
+
+          <span class="badge bg-secondary text-light rounded-pill px-2 py-1 small">
+            {% if notif.type == "payment_due" %}🔔{% elif notif.type == "investment" %}📈{% endif %}
+            {{ notif.get_type_display }}
+          </span>
+
+          <span class="text-wrap">{{ notif.message }}</span>
+        </div>
+        <small class="text-muted d-block mt-1">{{ notif.created_at|date:"M d, Y H:i" }}</small>
+      </div>
+    </a>
+  {% empty %}
+    <div class="alert alert-info shadow-sm mt-2">
+      You have no notifications.
+    </div>
+  {% endfor %}
+</div>
+    <div class="mb-3">
+  <a href="{% url 'daylo' %}" class="btn btn-info d-inline-flex align-items-center gap-2">
+    <i class="bi bi-arrow-left-circle-fill"></i>
+    Back
+  </a>
+</div>
+
+
+</div>
+
+
+
+
+
+
+{% endblock %}

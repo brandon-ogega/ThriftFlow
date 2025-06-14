@@ -1,0 +1,54 @@
+{% extends 'main.html' %}
+{% block content %}
+   <div class="container my-5 py-5">
+  <div class="card mx-auto shadow" style="max-width:600px;">
+    <!-- Header: Bill Type & Status -->
+    <div class="card-header d-flex justify-content-between align-items-center bg-white">
+      <div class="d-flex align-items-center" style="gap:0.5rem;">
+        <i class="bi bi-calendar3 text-info"></i>
+        <strong>{{ bill.type }}</strong>
+      </div>
+      <span class="badge rounded-pill bg-secondary text-white" style="font-size:0.9em;">
+        {{ bill.status|title }}
+      </span>
+    </div>
+
+    <!-- Body: Bill Details -->
+    <div class="card-body">
+      <dl class="row mb-3">
+        <dt class="col-sm-5">Amount</dt>
+        <dd class="col-sm-7">
+          <span class="badge rounded-pill bg-info text-white" style="font-size:0.9em;">
+            KSh {{ bill.amount|floatformat:2 }}
+          </span>
+        </dd>
+
+        <dt class="col-sm-5">Due Date</dt>
+        <dd class="col-sm-7">{{ bill.due_date|date:"M d, Y" }}</dd>
+
+        <dt class="col-sm-5">Recurring</dt>
+        <dd class="col-sm-7">
+          <span class="badge rounded-pill {% if bill.recurring %}bg-success{% else %}bg-warning{% endif %} text-white" style="font-size:0.9em;">
+            {% if bill.recurring %}Yes{% else %}No{% endif %}
+          </span>
+        </dd>
+
+        <dt class="col-sm-5">Created On</dt>
+        <dd class="col-sm-7">{{ bill.created_at|date:"M d, Y H:i" }}</dd>
+      </dl>
+    </div>
+
+    <!-- Footer: Navigation Buttons -->
+    <div class="card-footer d-flex justify-content-end bg-white">
+      <a href="{% url 'daylo' %}" class="btn btn-outline-secondary me-2">
+        <i class="bi bi-arrow-left-circle me-1"></i>Back
+      </a>
+      <a href="{% url 'update_bill' bill.id %}" class="btn btn-primary">
+        <i class="bi bi-pencil-square me-1"></i>Edit
+      </a>
+    </div>
+  </div>
+</div>
+
+
+{% endblock %}

@@ -1,34 +1,94 @@
 {% extends 'main.html' %}
 {% block content %}
 {% load static %}
-<div class="container my-5 py-5">
-<div class="list-group list-group-light mx-auto" style="max-width:600px;">
-  {% for b in budgets %}
-    <div class="list-group-item list-group-item-action d-flex justify-content-between align-items-center px-3 border-0 rounded mb-2 shadow-sm">
-      <div>
-        <i class="bi bi-wallet2 me-2 text-info"></i>
-        <a href="{% url 'budget' b.id %}" class="fw-semibold text-dark text-decoration-none">
-          {{ b.item }}
-        </a>
-      </div>
-      <a href="{% url 'budget' b.id %}" class="btn btn-outline-info btn-sm">
-        View
-      </a>
-    </div>
-  {% empty %}
-    <div class="list-group-item text-muted px-3 border-0 rounded mb-2">
-      No budgets available.
-    </div>
-  {% endfor %}
+<style>
+  body {
+    padding-top: 35px;
+  }
+  .container .bi-bell {
+    margin-top: 10px;
+    position: relative;
+  }
+</style>
 
-  <div class="d-flex justify-content-between align-items-center mt-3">
-    <span class="badge bg-info text-dark px-2 py-1">
-      {{ budgets|length }} {% if budgets|length == 1 %}budget{% else %}budgets{% endif %}
-    </span>
-    <a class="btn btn-info btn-sm" href="{% url 'create_budget' %}">
-      + New Budget
-    </a>
+<div class="container my-5 py-5">
+  <div class="container mx-auto" style="max-width: 980px;">
+
+    <!-- Notifications Badge -->
+    <div class="d-flex justify-content-end mb-4">
+  <a href="{% url 'notifications' %}" class="btn btn-link position-relative p-0 text-dark" aria-label="View notifications">
+    <i class="bi bi-bell fa-lg"></i>
+    {% if unread_count %}
+      <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+        {{ unread_count }}
+        <span class="visually-hidden">unread notifications</span>
+      </span>
+    {% endif %}
+  </a>
+</div>
+
+
+    <div class="row g-4">
+      <!-- Budgets Column -->
+      <div class="col-md-6">
+        <h5 class="text-center">My Budgets</h5>
+        <ul class="list-group list-group-light mb-3">
+          {% for b in budgets %}
+            <a href="{% url 'budget' b.id %}"
+               class="list-group-item list-group-item-action d-flex justify-content-between align-items-center px-3 border-0 rounded mb-2 shadow-sm">
+              <div>
+                <i class="bi bi-wallet2 me-2 text-info"></i>
+                <span class="fw-semibold">{{ b.item }}</span>
+              </div>
+              <span class="btn btn-outline-info btn-sm">View</span>
+            </a>
+          {% empty %}
+            <li class="list-group-item text-muted px-3 border-0 rounded mb-2">
+              <i class="bi bi-wallet2 me-2"></i>
+              No budgets — <a href="{% url 'create_budget' %}">create one</a>.
+            </li>
+          {% endfor %}
+          <li class="list-group-item px-3 border-0 rounded d-flex justify-content-between">
+            <span class="badge bg-info text-dark">{{ budgets|length }} {{ budgets|length|pluralize:"budget,budgets" }}</span>
+            <a href="{% url 'create_budget' %}" class="btn btn-info btn-sm">+ New Budget</a>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Bills Column -->
+      <div class="col-md-6">
+        <h5 class="text-center">Bills</h5>
+        <ul class="list-group list-group-light mb-3">
+          {% for bill in bills %}
+            <a href="{% url 'bill' bill.id %}"
+               class="list-group-item list-group-item-action d-flex justify-content-between align-items-center px-3 border-0 rounded mb-2 shadow-sm">
+              <div>
+                <i class="bi bi-receipt me-2 text-info"></i>
+                <span class="fw-semibold">{{ bill.type }}</span>
+                <div class="small text-muted"></div>
+              </div>
+              <div class="d-flex align-items-center">
+                <span class="badge {% if bill.status == 'paid' %}bg-success{% else %}bg-warning text-dark{% endif %} me-3">
+                  {{ bill.status|capfirst }}
+                </span>
+                <span class="btn btn-outline-info btn-sm">View</span>
+              </div>
+            </a>
+          {% empty %}
+            <li class="list-group-item text-muted px-3 border-0 rounded mb-2">
+              <i class="bi bi-receipt me-2"></i>
+              No bills — <a href="{% url 'create_bill' %}">create one</a>.
+            </li>
+          {% endfor %}
+          <li class="list-group-item px-3 border-0 rounded d-flex justify-content-between">
+            <span class="badge bg-info text-dark">{{ bills|length }} {{ bills|length|pluralize:"bill,bills" }}</span>
+            <a href="{% url 'create_bill' %}" class="btn btn-info btn-sm">+ New Bill</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+
   </div>
 </div>
-</div>
+
 {% endblock %}
