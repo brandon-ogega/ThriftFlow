@@ -13,7 +13,7 @@
             {% for profit in profits %}
               <li class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 py-3 border-bottom">
                 <span class="fw-medium fs-6">{{ profit.source }}</span>
-                <a href="{% url 'profit' profit.id %}" class="badge bg-info-subtle text-info text-decoration-none px-3 py-2">
+                <a href="{% url 'profit' profit.id %}" class="badge bg-info text-white text-decoration-none px-3 py-2">
                   View Details
                 </a>
               </li>

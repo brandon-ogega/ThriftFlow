@@ -1,6 +1,5 @@
 from django.urls import path
 from . import views
-from . views import loginUser,logoutUser
 
 
 
@@ -16,20 +15,25 @@ urlpatterns = [
     path('profit/<str:pk>/', views.profit, name='profit'),
     path('savings/', views.savings, name='savings'),
     path('saving/<str:pk>/', views.saving, name='saving'),
+    path('delete_saving/<str:pk>/', views.deleteSaving, name='delete_saving'),
+    path('update_saving/<str:pk>/', views.updateSavings, name='update_saving'),
     path('login/', views.loginUser, name='login'),
     path('logout/', views.logoutUser, name='logout'),
     path('create_investment/', views.createInvestment, name='create_investment'),
     path('update_investment/<str:pk>/', views.updateInvestment, name='update_investment'),
     path('investment/<str:pk>/', views.investment, name='investment'),
+    path('delete_investment/<str:pk>/', views.deleteInvestment, name='delete_investment'),
     path('create_savings/', views.createSavings, name='create_savings'),
     path('create_budget/', views.createBudget, name='create_budget'),
     path('budget/<str:pk>/', views.budget, name='budget'),
+    path('delete_budget/<str:pk>/', views.deleteBudget, name='delete_budget'),
     path('update_budget/<str:pk>/', views.updateBudget, name='update_budget'),
     path('create_notification/', views.createNotification, name='create_notification'),
     path('create_expenditure/', views.createExpenditure, name='create_expenditure'),
     path('show_profits/', views.showProfits, name='show_profits'),
     path('create_bill/', views.createBill, name='create_bill'),
     path('bill/<str:pk>/', views.bill, name='bill'),
+    path('delete_bill/<str:pk>/', views.deleteBill, name='delete_bill'),
     path('update_bill/<str:pk>/', views.updateBill, name='update_bill'),
     path('notifications/', views.notifications, name='notifications'),
 

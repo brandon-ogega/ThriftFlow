@@ -85,6 +85,16 @@ def updateInvestment(request, pk):
 
     context = {'form': form,"from":"update"}
     return render(request,'base/investment_form.html', context)
+
+@login_required(login_url="login")
+def deleteInvestment(request, pk):
+    investment = Investment.objects.get(id=pk)
+    context ={"investment":investment}
+    if request.method == "POST":
+        investment.delete()
+        return redirect('investments')
+    return render(request, 'base/delete_form.html', context)
+
 def home(request):
     bills = Bill.objects.all()
     """
@@ -148,6 +158,27 @@ def createSavings(request):
     context = {"form": form,"from":"create"}
     return render(request,'base/savings_form.html',context)
 
+def updateSavings(request, pk):
+    saving = Saving.objects.get(id=pk)
+    form = SavingForm(instance=saving)
+    if request.method == "POST":
+        form = SavingForm(request.POST, instance=saving)
+        form.save()
+        return redirect("savings")
+    context = {'form': form,"from":"update"}
+    return render(request,'base/savings_form.html',context)
+
+@login_required(login_url="login")
+def deleteSaving(request, pk):
+    saving = Saving.objects.get(id=pk)
+    context ={"saving":saving}
+    if request.method == "POST":
+        saving.delete()
+        return redirect('savings')
+    return render(request, 'base/delete_form.html', context)
+
+
+
 
 def contact(request):
     return render(request, 'base/contact.html')
@@ -188,6 +219,16 @@ def createBudget(request):
             return redirect("daylo")
     context = {"form": form,"from":"create"}
     return render(request,'base/budget_form.html',context)
+
+@login_required(login_url="login")
+def deleteBudget(request, pk):
+    budget = Budget.objects.get(id=pk)
+    context ={"budget":budget}
+    if request.method == "POST":
+        budget.delete()
+        return redirect('daylo')
+    return render(request, 'base/delete_form.html', context)
+
 
 @login_required(login_url="login")
 def createExpenditure(request):
@@ -236,6 +277,16 @@ def updateBill(request,pk):
         return redirect("daylo")
     context = {'form': form,"from":"update"}
     return render(request, 'base/bill_form.html',context)
+
+@login_required(login_url="login")
+def deleteBill(request, pk):
+    bill = Bill.objects.get(id=pk)
+    context ={"bill":bill}
+    if request.method == "POST":
+        bill.delete()
+        return redirect('daylo')
+    return render(request, 'base/delete_form.html', context)
+
 
 def notifications(request):
     notifications = Notification.objects.all()
